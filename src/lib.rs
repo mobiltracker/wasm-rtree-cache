@@ -19,6 +19,23 @@ pub struct Bbox {
     pub north_east: Coordinate,
 }
 
+#[wasm_bindgen]
+impl Bbox {
+    pub fn new(
+        south_west: Coordinate,
+        south_east: Coordinate,
+        north_west: Coordinate,
+        north_east: Coordinate,
+    ) -> Self {
+        Self {
+            north_east,
+            north_west,
+            south_east,
+            south_west,
+        }
+    }
+}
+
 // Wasm iterop coordinate
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy)]
@@ -35,6 +52,18 @@ impl Coordinate {
 
     pub fn lon(&self) -> f32 {
         self.x
+    }
+
+    pub fn set_lon(&mut self, x: f32) {
+        self.x = x;
+    }
+
+    pub fn set_lat(&mut self, y: f32) {
+        self.y = y;
+    }
+
+    pub fn new(lat: f32, lon: f32) -> Self {
+        Self { x: lon, y: lat }
     }
 }
 
