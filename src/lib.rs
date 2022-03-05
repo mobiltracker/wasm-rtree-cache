@@ -1,4 +1,4 @@
-use std::sync::Mutex;
+use std::{convert::TryInto, sync::Mutex};
 
 use once_cell::sync::OnceCell;
 use rtree::{BoundingBox, CoordinateCache};
@@ -33,6 +33,12 @@ impl Bbox {
             south_east,
             south_west,
         }
+    }
+
+    pub fn from_osm_bbox(bbox_vec: Vec<f64>) -> Self {
+        let bbox: BoundingBox = bbox_vec.try_into().unwrap();
+        let bbox: Bbox = bbox.into();
+        bbox
     }
 }
 
